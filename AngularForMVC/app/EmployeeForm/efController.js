@@ -32,13 +32,19 @@
                 }
 
                 if ($scope.editableEmployee.id === 0) {
-                    DataService.insertEmployee($scope.editableEmployee);
+                    DataService.insertEmployee($scope.editableEmployee).then(
+                        function(result) {
+                            $scope.employee = angular.copy($scope.editableEmployee);
+                            $window.history.back();
+                        },
+                        function(result) {
+                            alert("Error occurred while saving: " + result);
+                        });
+
+
                 } else {
                     DataService.updateEmployee($scope.editableEmployee);
                 }
-
-                $scope.employee = angular.copy($scope.editableEmployee);
-                $window.history.back();
             };
 
             $scope.cancelForm = function () {

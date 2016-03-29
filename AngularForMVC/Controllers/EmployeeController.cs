@@ -1,8 +1,5 @@
 ﻿using AngularForMVC.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -11,10 +8,9 @@ namespace AngularForMVC.Controllers
 {
     public class EmployeeController : Controller
     {
-        // GET: Employee
         public ActionResult GetEmployees()
         {
-            List<EmployeeVM> list = new List<EmployeeVM>
+            var list = new List<EmployeeVM>
             {
                 new EmployeeVM
                 {
@@ -35,6 +31,11 @@ namespace AngularForMVC.Controllers
             };
 
             return jsonResult;
+        }
+
+        public ActionResult Create(EmployeeVM employeeVm)
+        {
+            return new HttpStatusCodeResult(201, "New employee added");
         }
     }
 }

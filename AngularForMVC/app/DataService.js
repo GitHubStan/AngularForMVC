@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('angularFormsApp').factory('DataService',
-        function () {
+        ['$http', 
+        function ($http) {
 
             var employees = [];
 
@@ -36,9 +37,8 @@
                 }
             }
 
-            function insertEmployee (employee) {
-                employee.id = employees.length;
-                return employees.push(employee);
+            function insertEmployee (newEmployee) {
+                return $http.post("Employee/Create", newEmployee);
             }
 
             function updateEmployee(employee) {
@@ -50,9 +50,8 @@
             }
 
             function getEmployees() {
-                $http.get("Employee/GetEmployees");
-                return employees;
+                return $http.get("Employee/GetEmployees");
             }
-        });
+        }]);
 })();
 
