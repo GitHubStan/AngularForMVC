@@ -35,6 +35,7 @@
                     DataService.insertEmployee($scope.editableEmployee).then(
                         function(result) {
                             $scope.employee = angular.copy($scope.editableEmployee);
+                            $scope.employee.id = result.data.id;
                             $window.history.back();
                         },
                         function (result) {
@@ -44,7 +45,15 @@
 
 
                 } else {
-                    DataService.updateEmployee($scope.editableEmployee);
+                    DataService.updateEmployee($scope.editableEmployee).then(
+                        function(result) {
+                            $scope.employee = angular.copy($scope.editableEmployee);
+                            $window.history.back();
+                        },
+                        function (result) {
+                            $scope.hasFormError = true;
+                            $scope.formErrors = result.statusText;
+                        });
                 }
             };
 

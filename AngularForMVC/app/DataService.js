@@ -42,7 +42,7 @@
             }
 
             function updateEmployee(employee) {
-                employees[employee.id] = employee;
+                return $http.post("Employee/Update" + employee.id, employee);
             }
 
             function getEmployee(id) {
