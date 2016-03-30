@@ -37,8 +37,9 @@
                             $scope.employee = angular.copy($scope.editableEmployee);
                             $window.history.back();
                         },
-                        function(result) {
-                            alert("Error occurred while saving: " + result);
+                        function (result) {
+                            $scope.hasFormError = true;
+                            $scope.formErrors = result.statusText;
                         });
 
 
